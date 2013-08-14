@@ -1,0 +1,4 @@
+LCDThingerKata
+==============
+
+LCD Display kata
