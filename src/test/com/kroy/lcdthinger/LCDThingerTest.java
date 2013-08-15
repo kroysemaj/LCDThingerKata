@@ -1,8 +1,12 @@
 package test.com.kroy.lcdthinger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.kroy.lcdthinger.LCDIntegerConstants;
@@ -10,72 +14,102 @@ import com.kroy.lcdthinger.LCDThinger;
 
 public class LCDThingerTest {
 
+	private LCDThinger lcdt;
+	
+	@Before 
+	public void setUp() {
+		lcdt = new LCDThinger();
+	}
+	
 	@Test
 	public void itCanRepresentZero() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(0), LCDIntegerConstants.ZERO); 
+		assertEquals(lcdt.convertDigitToLCDDigit(0), LCDIntegerConstants.ZERO); 
 	}
 
 	@Test
 	public void itCanRepresentOne() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(1), LCDIntegerConstants.ONE); 
+		assertEquals(lcdt.convertDigitToLCDDigit(1), LCDIntegerConstants.ONE); 
 	}
 
 	@Test
 	public void itCanRepresentTwo() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(2), LCDIntegerConstants.TWO);
+		assertEquals(lcdt.convertDigitToLCDDigit(2), LCDIntegerConstants.TWO);
 	}
 
 	@Test
 	public void itCanRepresentThree() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(3), LCDIntegerConstants.THREE);
+		assertEquals(lcdt.convertDigitToLCDDigit(3), LCDIntegerConstants.THREE);
 	}
 
 	@Test
 	public void itCanRepresentFour() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(4), LCDIntegerConstants.FOUR);
+		assertEquals(lcdt.convertDigitToLCDDigit(4), LCDIntegerConstants.FOUR);
 	}
 	
 	@Test
 	public void itCanRepresentFive() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(5), LCDIntegerConstants.FIVE);
+		assertEquals(lcdt.convertDigitToLCDDigit(5), LCDIntegerConstants.FIVE);
 	}
 	
 	@Test
 	public void itCanRepresentSix() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(6), LCDIntegerConstants.SIX);
+		assertEquals(lcdt.convertDigitToLCDDigit(6), LCDIntegerConstants.SIX);
 	}
 	
 	@Test
 	public void itCanRepresentSeven() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(7), LCDIntegerConstants.SEVEN);
+		assertEquals(lcdt.convertDigitToLCDDigit(7), LCDIntegerConstants.SEVEN);
 	}
 	
 	@Test
 	public void itCanRepresentEight() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(8), LCDIntegerConstants.EIGHT);
+		assertEquals(lcdt.convertDigitToLCDDigit(8), LCDIntegerConstants.EIGHT);
 	}
 	
 	@Test
 	public void itCanRepresentNine() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(9), LCDIntegerConstants.NINE);
+		assertEquals(lcdt.convertDigitToLCDDigit(9), LCDIntegerConstants.NINE);
 	}
 	
 	@Test
-	public void itCanConcat2LCDNumbers() {
-		LCDThinger lcdt = new LCDThinger();
-		assertEquals(lcdt.convertNumbersToLCDDigits(9), LCDIntegerConstants.NINE);
+	public void itCanParseMultiDigitNumbersToIntegerList() {
+		List<Integer> intList = new ArrayList<Integer>();
+		intList.add(1);
+		intList.add(2);
+		intList.add(3);
+		assertEquals(lcdt.parseDigits("123"), intList);
 	}
+	
+	@Test
+	public void itCanGetTheLCDForEachNumberInAnIntList() {
+		List<Integer> intList = new ArrayList<Integer>();
+		intList.add(1);
+		intList.add(2);
+		intList.add(3);
 		
+		List<String> lcds = new ArrayList<String>();
+		lcds.add(LCDIntegerConstants.ONE);
+		lcds.add(LCDIntegerConstants.TWO);
+		lcds.add(LCDIntegerConstants.THREE);
+		
+		assertEquals(lcdt.fetchLCDForDigit(intList), lcds);
+	}
+	
+	@Test
+	public void itCanConcatTheTopLineOf2LCDNumbers() {
+		String zeroOneTopLine = 	" _ " + "   ";
+		fail("Haven't written it yet");
+//		assertEquals(lcdt.buildLCD(), zeroOneTopLine);
+	}
+
+	@Test
+	public void itCanConcat2LCDNumbers() {
+		String zeroOne = 	" _ " + "   " + 
+				"| |" + "  |" +
+				"|_|" + "  |";
+		fail("Haven't written it yet");
+//		assertEquals(lcdt.buildLCD(), zeroOne);
+	}
 	
 }
 
