@@ -29,9 +29,20 @@ public class LCDThinger {
 		LCDToIntegerMap.put(9, LCDIntegerConstants.NINE);
 	}
 
-	public String buildLCD() {
-		
-		return null;
+	public List<ArrayList<String>> breakDownLCDDigits(List<String> lcds) {
+		List<ArrayList<String>> sortedLCDs = new ArrayList<ArrayList<String>>();
+		List<String> line1 = new ArrayList<String>(); 
+		List<String> line2 = new ArrayList<String>(); 
+		List<String> line3 = new ArrayList<String>(); 
+		for(String lineOfDigit : lcds){
+			line1.add(lineOfDigit.substring(0, 3));
+			line2.add(lineOfDigit.substring(3, 6));
+			line3.add(lineOfDigit.substring(6));
+		}
+		sortedLCDs.add((ArrayList<String>) line1);
+		sortedLCDs.add((ArrayList<String>) line2);
+		sortedLCDs.add((ArrayList<String>) line3);
+		return sortedLCDs;
 	}
 
 	public List<Integer> parseDigits(String longNumber) {
@@ -54,6 +65,33 @@ public class LCDThinger {
 		}
 		return convertedDigits;
 	}
+
+	public List<String> assemblePrintableLCD(List<ArrayList<String>> splitLCDs) {
+		
+		List<String> resortedLCDs = new ArrayList<String>();
+		
+		for(ArrayList<String> lineOfDigit : splitLCDs){
+			StringBuilder appendedLine = new StringBuilder();
+			for(String lineSegment : lineOfDigit) {
+				appendedLine.append(lineSegment);
+			}
+			resortedLCDs.add(appendedLine.toString());
+		}
+		
+		return resortedLCDs;
+	}
+	
+	public String printLCD(List<String> resortedLCDs) {
+		StringBuilder printableString = new StringBuilder();
+		
+		for(String lines : resortedLCDs){
+			printableString.append(lines);
+		}
+		
+		return printableString.toString();
+		
+	}
+
 	
 
 }
